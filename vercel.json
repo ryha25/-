@@ -1,0 +1,5 @@
+{
+  "installCommand": "npm install --no-package-lock",
+  "buildCommand": "NITRO_PRESET=vercel vite build",
+  "outputDirectory": ".output"
+}

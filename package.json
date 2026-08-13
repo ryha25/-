@@ -40,7 +40,8 @@
     "typescript-eslint": "8.59.3",
     "vinext": "1.0.0-beta.2",
     "vite": "8.0.13",
-    "wrangler": "4.92.0"
+    "wrangler": "4.92.0",
+    "nitro": "^2.12.8"
   },
   "type": "module"
 }

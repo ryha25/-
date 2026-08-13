@@ -41,6 +41,16 @@ export default defineConfig(async () => {
   process.env.WRANGLER_LOG_PATH ??= ".wrangler/logs";
   process.env.MINIFLARE_REGISTRY_PATH ??= ".wrangler/registry";
 
+  const isVercel = process.env.VERCEL === "1" || process.env.NITRO_PRESET === "vercel";
+  const platformPlugins = isVercel
+    ? [(await import("nitro/vite")).nitro()]
+    : [
+        cloudflare({
+          viteEnvironment: { name: "rsc", childEnvironments: ["ssr"] },
+          config: localBindingConfig,
+        }),
+      ];
+
   return {
     server: isCodexSeatbeltSandbox
       ? { watch: { useFsEvents: false, usePolling: true } }
@@ -48,10 +58,7 @@ export default defineConfig(async () => {
     plugins: [
       vinext(),
       sites(),
-      cloudflare({
-        viteEnvironment: { name: "rsc", childEnvironments: ["ssr"] },
-        config: localBindingConfig,
-      }),
+      ...platformPlugins,
     ],
   };
 });

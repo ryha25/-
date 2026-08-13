@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState } from "react";
+import { StadiumCanvas } from "./StadiumCanvas";
 
 export type PlayStats = { goals: number; shots: number; turnovers: number; passes: number; tackles: number };
 type Point = { x: number; y: number };

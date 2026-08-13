@@ -46,3 +46,5 @@ html,body{min-width:100%;min-height:100%;width:100%;max-width:100%;}
 .three-pitch:before{box-shadow:inset 0 0 0 999px #092d1d22,0 -42px 0 -32px #243941,0 -56px 0 -44px #b9d5d255}
 .three-stage{background:radial-gradient(ellipse at 50% 15%,#41606b 0,#142b35 32%,#0a151b 68%),linear-gradient(#142631 0 18%,#203b46 18% 24%,#111d24 24%)}
 .stadium-lights{position:absolute;inset:0;pointer-events:none;background:radial-gradient(ellipse at 8% 12%,#eefbc555 0 2%,transparent 22%),radial-gradient(ellipse at 92% 12%,#eefbc555 0 2%,transparent 22%);mix-blend-mode:screen}
+.stadium-webgl{position:absolute;inset:0;width:100%;height:100%;z-index:0;pointer-events:none;opacity:.86}
+.three-stage>.play-pitch{z-index:1}

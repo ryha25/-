@@ -8,6 +8,7 @@ import { acceptTransfer, generateOffers, leagues, tableFor } from "@/game/world"
 import { PlayableMatch, type PlayStats } from "./PlayableMatch";
 import { ConsoleHome } from "./ConsoleHome";
 import { PlayerProfile } from "./PlayerProfile";
+import { StadiumCanvas } from "./StadiumCanvas";
 
 const STORAGE_KEY = "pitch-one-career-v1";
 const baseAttributes = { speed: 72, shooting: 66, passing: 64, dribbling: 70, defending: 38, physical: 61 };
@@ -104,7 +105,7 @@ export function CareerGame() {
         {game.phase === "training" && <div className="training-grid">{Object.entries(trainingOptions).map(([id,t]) => <button onClick={() => selectTraining(id as TrainingId)} key={id}><span>{t.name}</span><small>{t.detail}</small><b className={t.load < 0 ? "recover" : ""}>{t.load > 0 ? `負荷 +${t.load}` : `疲労 ${t.load}`}</b></button>)}</div>}
         {game.phase === "selection" && <div className="decision"><span className="decision-num">{game.startChance}%</span><div><h3>選考会議の準備が整いました</h3><p>監督評価、戦術適性、直近のフォーム、疲労をもとに次節メンバーを決定します。</p></div><button className="primary" onClick={() => setGame(announceSelection(game))}>メンバー発表を見る →</button></div>}
         {game.phase === "match" && matchMode === "choose" && <div className="match-modes">{game.careerRole !== "manager" && <button onClick={() => setMatchMode("play")}><i>10</i><span><b>選手としてプレイ</b><small>22人の中で自分の選手だけを操作する</small></span><em>PLAY</em></button>}<button onClick={() => setMatchMode("watch")}><i className="coach">▦</i><span><b>監督目線で観戦</b><small>スタメン11人とサブ7人の起用・交代を見届ける</small></span><em>WATCH</em></button></div>}
-        {game.phase === "match" && matchMode === "play" && <PlayableMatch number={game.player.number} opponent={nextOpponent} onFinish={stats => finishMatch("play", stats)} onBack={() => setMatchMode("choose")}/>} 
+        {game.phase === "match" && matchMode === "play" && <div className="match-stadium-shell"><StadiumCanvas/><PlayableMatch number={game.player.number} opponent={nextOpponent} onFinish={stats => finishMatch("play", stats)} onBack={() => setMatchMode("choose")}/></div>} 
         {game.phase === "match" && matchMode === "watch" && <div className="watch-match"><div className="tactics-board"><div className="halfway"/><span className="ball">●</span>{[1,2,3,4,5,6,7,8,9,10,11].map(n => <i key={n} style={{ left: `${15 + (n%4)*21}%`, top: `${12 + Math.floor(n/4)*28}%` }}>{n}</i>)}</div><div><span className="eyebrow">MANAGER VIEW · 4-3-3</span><h3>監督席から試合を観戦</h3><p>疲労、フォーム、戦術適性をもとに起用と交代を自動判断します。試合終了後に詳細採点を確認できます。</p><button className="primary" onClick={() => finishMatch("watch")}>キックオフして観戦 →</button><button className="text-button" onClick={() => setMatchMode("choose")}>モード選択へ戻る</button></div></div>}
         <div className="growth"><span>次の能力アップまで</span><Meter value={game.growth}/><b>{game.growth}/100</b></div>
       </article><article className="news-card"><div className="section-head"><div><span className="eyebrow">LIVE FEED</span><h2>クラブニュース</h2></div><button onClick={() => setTab("ニュース")}>すべて見る</button></div><div className="news-list">{game.news.slice(0,4).map(n => <div key={n.id}><span>{n.tag}</span><p>{n.text}</p><small>たった今</small></div>)}</div></article></section>

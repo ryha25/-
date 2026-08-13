@@ -27,3 +27,18 @@
 .human-player:after,.cpu-player:after,.ally-player:after,.keeper:after{left:3px;right:3px;bottom:0;height:7px;clip-path:none;background:linear-gradient(90deg,#f1f2ec 0 42%,transparent 43% 57%,#f1f2ec 58%)}
 @media(max-width:950px){.career-stage{grid-template-columns:1fr .45fr;padding:35px}.stage-copy h1{font-size:34px}.next-activity{grid-template-columns:1fr}.next-activity>div:first-child{border-right:0;border-bottom:1px solid #ddd}.console-training{padding:15px 0 0}.career-lower{grid-template-columns:1fr}.broadcast-body{grid-template-columns:1fr}.commentary{height:220px}.player-hud{grid-template-columns:repeat(4,1fr)}.console-profile{grid-template-columns:1fr}.profile-visual{position:absolute;right:-40px;top:30px;opacity:.35}.attribute-deck{grid-template-columns:repeat(3,1fr);z-index:2}}@media(max-width:600px){.console-home{border:0}.career-stage{min-height:310px;padding:25px}.stage-copy h1{font-size:29px}.stage-player{display:none}.career-stage{grid-template-columns:1fr}.next-activity,.selection-stage,.matchday-reveal{margin:0 10px;grid-template-columns:1fr}.console-training{grid-template-columns:1fr 1fr}.formation-mini{margin:0 0 15px}.career-ribbon{margin:10px;grid-template-columns:1fr 1fr}.career-ribbon button{min-height:45px}.career-lower{margin:10px}.match-entry>div{grid-template-columns:1fr}.broadcast-pitch{height:240px}.player-hud{grid-template-columns:repeat(3,1fr)}.console-profile{padding:28px 20px}.profile-info h1{font-size:32px}.attribute-deck{grid-template-columns:1fr 1fr}}
 .dashboard:has(.console-home)>.topline{display:none}.dashboard:has(.console-home){padding:18px;max-width:none}
+
+/* PWA landscape shell: decorative layers never block gameplay controls. */
+:root{--safe-top:env(safe-area-inset-top,0px);--safe-right:env(safe-area-inset-right,0px);--safe-bottom:env(safe-area-inset-bottom,0px);--safe-left:env(safe-area-inset-left,0px)}
+html,body{min-width:100%;min-height:100%;width:100%;max-width:100%;}
+.pwa-rotate-overlay{position:fixed;inset:0;z-index:10000;display:grid;place-items:center;padding:calc(24px + var(--safe-top)) calc(24px + var(--safe-right)) calc(24px + var(--safe-bottom)) calc(24px + var(--safe-left));background:rgba(3,10,12,.97);color:#f4f8f3;text-align:center;touch-action:manipulation}
+.pwa-rotate-card{width:min(88vw,420px);padding:28px 24px;border:1px solid #bdf73566;background:#0d2229;box-shadow:0 20px 70px #0008}
+.pwa-rotate-icon{font-size:44px;line-height:1;color:var(--lime);margin-bottom:12px}
+.pwa-rotate-card h2{margin:0;font-size:clamp(17px,4vw,24px)}
+.pwa-rotate-card p{margin:10px 0 20px;color:#a7b8bb;font-size:12px;line-height:1.6}
+.pwa-rotate-card button,.pwa-install-banner button{min-height:44px;border:0;background:var(--lime);color:#10232b;padding:0 18px;font-weight:900;cursor:pointer;touch-action:manipulation}
+.pwa-install-banner{position:fixed;left:max(12px,var(--safe-left));right:max(12px,var(--safe-right));bottom:max(12px,var(--safe-bottom));z-index:9999;display:flex;justify-content:center;pointer-events:none}
+.pwa-install-banner>div{display:flex;align-items:center;gap:10px;max-width:min(680px,100%);padding:10px 12px;background:#0c2028eF;border:1px solid #bdf73566;color:#e6eeea;font-size:11px;box-shadow:0 10px 35px #0008;pointer-events:auto}
+.pwa-install-banner span{flex:1;line-height:1.35}
+.pwa-install-banner .pwa-dismiss{background:transparent;color:#b6c4c5;border:1px solid #789096}
+@media (orientation:landscape) and (max-width:900px){html,body{overflow-x:hidden}.app-shell{min-height:100dvh;min-height:100svh}.pwa-install-banner{bottom:max(8px,var(--safe-bottom))}}

@@ -1,9 +1,22 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "PITCH / ONE — 選手キャリアシミュレーター",
-  description: "一人の選手として、練習・競争・試合・成長を生きるサッカーキャリアシミュレーター。",
+  title: "PITCH / ONE",
+  description: "PITCH / ONE football career game",
+  manifest: "/manifest.webmanifest",
+  appleWebApp: {
+    capable: true,
+    statusBarStyle: "black-translucent",
+    title: "PITCH / ONE",
+  },
+};
+
+export const viewport: Viewport = {
+  width: "device-width",
+  initialScale: 1,
+  viewportFit: "cover",
+  userScalable: false,
 };
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
